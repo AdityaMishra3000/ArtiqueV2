@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Artistry - Creative Marketplace</title>
+    <link rel="stylesheet" href="guestPage.css">
+</head>
+<body>
+    <div class="ambient-bg">
+        <div class="ambient-shape shape-1"></div>
+        <div class="ambient-shape shape-2"></div>
+        <div class="ambient-shape shape-3"></div>
+    </div>
+
+    <div class="glass-container">
+        <nav>
+            <div class="logo-section">
+                <div class="logo">
+                    <div class="logo-icon">🎨</div>
+                    Artique
+                </div>
+                <div class="nav-links">
+                </div>
+            </div>
+            <div class="nav-right">
+                <div class="search-box">
+                    <span>🔍</span>
+                    <input type="text" placeholder="Search">
+                </div>
+                <button class="signup-btn" onclick="openSignIn()">Signup</button>
+            </div>
+        </nav>
+
+        <div class="hero">
+            <h1>A home for every artist.</h1>
+            <p>Showcase. Sell. Teach. Inspire.</p>
+            <div class="category-tabs">
+                <button class="category-tab active">Music</button>
+                <button class="category-tab">Art</button>
+                <button class="category-tab">Photography</button>
+                <button class="category-tab">Digital</button>
+                <button class="category-tab">Dance</button>
+            </div>
+        </div>
+
+        <h2 class="section-title">Featured Artists</h2>
+        <div class="artists-grid">
+            <div class="artist-card" onclick="window.location.href='ArtistProfile-Anne.html'">
+                <div style="position: relative;">
+                    <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&h=400&fit=crop" alt="Artist" class="artist-image">
+                    <div class="artist-badge">🎵</div>
+                </div>
+                <div class="artist-info">
+                    <div class="artist-category">Music</div>
+                    <div class="artist-status">Composer</div>
+                </div>
+            </div>
+            <div class="artist-card">
+                <div style="position: relative;">
+                    <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&h=400&fit=crop" alt="Artist" class="artist-image">
+                    <div class="artist-badge">🎨</div>
+                </div>
+                <div class="artist-info">
+                    <div class="artist-category">Art</div>
+                    <div class="artist-status">Concepts</div>
+                </div>
+            </div>
+            <div class="artist-card">
+                <div style="position: relative;">
+                    <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?w=400&h=400&fit=crop" alt="Artist" class="artist-image">
+                    <div class="artist-badge">📸</div>
+                </div>
+                <div class="artist-info">
+                    <div class="artist-category">Photography</div>
+                    <div class="artist-status">Portrait</div>
+                </div>
+            </div>
+            <div class="artist-card" onclick="window.location.href='ArtistProfile-ErenYeager.html'">
+                <div style="position: relative;">
+                    <img src="https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=400&h=400&fit=crop" alt="Artist" class="artist-image">
+                    <div class="artist-badge">✂️</div>
+                </div>
+                <div class="artist-info">
+                    <div class="artist-category">Crafts</div>
+                    <div class="artist-status">D.I.Y.</div>
+                </div>
+            </div>
+            <div class="artist-card">
+                <div style="position: relative;">
+                    <img src="https://images.unsplash.com/photo-1502823403499-6ccfcf4fb453?w=400&h=400&fit=crop" alt="Artist" class="artist-image">
+                    <div class="artist-badge">🌸</div>
+                </div>
+                <div class="artist-info">
+                    <div class="artist-category">Floral Arts</div>
+                    <div class="artist-status">Floral</div>
+                </div>
+            </div>
+            <div class="artist-card">
+                <div style="position: relative;">
+                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop" alt="Artist" class="artist-image">
+                    <div class="artist-badge">🎬</div>
+                </div>
+                <div class="artist-info">
+                    <div class="artist-category">Films</div>
+                    <div class="artist-status">Sci-Fi</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="pagination">
+            <div class="dot active"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+        </div>
+
+        <div class="main-content">
+            <aside class="sidebar">
+                <div class="sidebar-item active">
+                    <span>👤</span>
+                    <span>User profile</span>
+                </div>
+                <div class="sidebar-item">
+                    <span>📁</span>
+                    <span>Portfolio</span>
+                </div>
+                <div class="sidebar-item">
+                    <span>🛍️</span>
+                    <span onclick="window.location.href='Marketplace.html'">Shop</span>
+                </div>
+                <div class="sidebar-item">
+                    <span>🎓</span>
+                    <span>Classes</span>
+                </div>
+                <div class="sidebar-item">
+                    <span>⚙️</span>
+                    <span>Settings</span>
+                </div>
+            </aside>
+
+            <div>
+                <h2 class="section-title">Marketplace</h2>
+                <div class="marketplace-grid">
+                    <div class="product-card">
+                        <img src="https://images.unsplash.com/photo-1578926314433-e2789279f4aa?w=400&h=400&fit=crop" alt="Product" class="product-image">
+                        <div class="product-info">
+                            <div class="product-title">Nature Oil Painting</div>
+                            <div class="product-price">
+                                <span class="price-main">₹ 2290</span>
+                                <!-- <span class="price-sub">₹ mfiorì</span> -->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="product-card">
+                        <img src="https://images.unsplash.com/photo-1610701596007-11502861dcfa?w=400&h=400&fit=crop" alt="Product" class="product-image">
+                        <div class="product-info">
+                            <div class="product-title">Fine China</div>
+                            <div class="product-price">
+                                <span class="price-main">₹ 9300</span>
+                                <!-- <span class="price-sub">₹ trlóoɔ</span> -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+             </div>
+         </div>
+    </div>
+    <!-- Sign-In Overlay -->
+<!-- Sign-In / Sign-Up Overlay -->
+<div id="signin-overlay" class="overlay">
+    <div class="container">
+  
+      <h1>Welcome to Artique</h1>
+      <p>Your gateway to exquisite art pieces.</p>
+  
+      <!-- Step 1: Choose type -->
+      <div id="signup-choice">
+        <p>Sign up as:</p>
+        <button class="role-btn" onclick="chooseRole('user')">👤 User</button>
+        <button class="role-btn" onclick="chooseRole('artist')">🎨 Artist</button>
+      </div>
+  
+      <!-- Step 2: User Sign Up Form -->
+      <form id="user-form" onsubmit="handleUserSignup(event)" style="display:none;">
+        <input type="text" placeholder="Enter username" required>
+        <input type="password" placeholder="Enter password" required>
+        <input type="email" placeholder="Enter your email" required>
+        <button type="submit">Sign Up</button>
+        <p style="margin-top:15px;">
+          Already have an account? <a href="Login.html" style="color:#ffb199;">Login</a>
+        </p>
+      </form>
+  
+      <!-- Step 3: Artist redirect -->
+      <div id="artist-redirect" style="display:none;">
+        <p>Redirecting you to <strong>Artist Sign Up</strong>...</p>
+        <a href="ArtistSignUp.html">
+          <button class="role-btn">Continue →</button>
+        </a>
+      </div>
+  
+      <button class="close-btn" onclick="closeSignIn()">✖</button>
+    </div>
+  </div>
+  
+  <script>
+    function openSignIn() {
+      document.getElementById('signin-overlay').style.display = 'flex';
+      // Reset state
+      document.getElementById('signup-choice').style.display = 'block';
+      document.getElementById('user-form').style.display = 'none';
+      document.getElementById('artist-redirect').style.display = 'none';
+    }
+  
+    function closeSignIn() {
+      document.getElementById('signin-overlay').style.display = 'none';
+    }
+  
+    function chooseRole(role) {
+      if (role === 'user') {
+        document.getElementById('signup-choice').style.display = 'none';
+        document.getElementById('user-form').style.display = 'flex';
+      } else if (role === 'artist') {
+        document.getElementById('signup-choice').style.display = 'none';
+        document.getElementById('artist-redirect').style.display = 'block';
+        // optional: auto redirect after 2s
+        setTimeout(() => { window.location.href = "ArtistSignUp.html"; }, 2000);
+      }
+    }
+  
+    function handleUserSignup(e) {
+      e.preventDefault();
+      alert("User signed up successfully!");
+      closeSignIn();
+    }
+  </script>
+  
+</body>
+</html>
+            
+                            
