@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eren Yeager- Artist Profile</title>
+    <link rel="stylesheet" href="ArtistProfile.css">
+</head>
+<body>
+    <div class="ambient-bg">
+        <div class="ambient-shape shape-1"></div>
+        <div class="ambient-shape shape-2"></div>
+        <div class="ambient-shape shape-3"></div>
+    </div>
+
+    <div class="container">
+        <div class="hero-section">
+            <div class="hero-banner">
+                <h1 class="hero-name">Eren Yeager</h1>
+            </div>
+            <div class="profile-content">
+                <div class="profile-header">
+                    <img src="https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=400&h=400&fit=crop"  class="profile-avatar">
+                    <div class="profile-actions">
+                        <div class="social-links">
+                            <div class="social-link">📘</div>
+                            <div class="social-link">🐦</div>
+                            <div class="social-link">📷</div>
+                            <div class="social-link">🔗</div>
+                        </div>
+                        <button class="follow-btn">Follow</button>
+                    </div>
+                </div>
+
+                <div class="about-section">
+                    <h2 class="about-title">About Me</h2>
+                    <p class="about-text">
+                        Passionate artist and creative soul specializing in contemporary art, digital illustrations, and traditional crafts. I believe in the power of art to transform spaces and inspire others. My work blends vibrant colors with intricate patterns, creating pieces that tell unique stories.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="nav-tabs">
+            <div class="nav-tab active" onclick="showSection('portfolio')">
+                <span class="nav-icon">🎨</span>
+                <span>Portfolio</span>
+            </div>
+            <div class="nav-tab" onclick="showSection('shop')">
+                <span class="nav-icon">🛍️</span>
+                <span>Shop</span>
+            </div>
+            <div class="nav-tab" onclick="showSection('classes')">
+                <span class="nav-icon">📚</span>
+                <span>Classes</span>
+            </div>
+        </div>
+
+        <!-- Portfolio Section -->
+        <div id="portfolio-section" class="section">
+            <h2 class="section-title">Portfolio</h2>
+               <div class="portfolio-grid">
+                <div class="portfolio-item">
+                    <img src="https://images.unsplash.com/photo-1547891654-e66ed7ebb968?w=400&h=400&fit=crop" alt="Mandala Art" class="portfolio-image">
+                    <div class="portfolio-info">
+                        <h3 class="portfolio-title">Intricate Mandala</h3>
+                        <p class="portfolio-description">Handcrafted mandala with traditional patterns and vibrant colors</p>
+                    </div>
+                </div>
+                <div class="portfolio-item">
+                    <img src="data:image/jpeg;base64,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" alt="Abstract Art" class="portfolio-image">
+                    <div class="portfolio-info">
+                        <h3 class="portfolio-title">Contemporary Acrylic</h3>
+                        <p class="portfolio-description">Modern abstract art with bold geometric shapes and textures</p>
+                    </div>
+                </div>
+                <div class="portfolio-item">
+                    <img src="https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?w=400&h=400&fit=crop" alt="Floral Art" class="portfolio-image">
+                    <div class="portfolio-info">
+                        <h3 class="portfolio-title">Colorful Blooms</h3>
+                        <p class="portfolio-description">Vibrant paper flowers bursting with energy and creativity</p>
+                    </div>
+                </div>
+                <div class="portfolio-item">
+                    <img src="https://images.unsplash.com/photo-1578926314433-e2789279f4aa?w=400&h=400&fit=crop" alt="Digital Art" class="portfolio-image">
+                    <div class="portfolio-info">
+                        <h3 class="portfolio-title">Digital Illustrations</h3>
+                        <p class="portfolio-description">Modern digital art combining traditional techniques with new media</p>
+                    </div>
+                </div>
+                <div class="portfolio-item">
+                    <img src="https://images.unsplash.com/photo-1610701596007-11502861dcfa?w=400&h=400&fit=crop" alt="Ceramic Art" class="portfolio-image">
+                    <div class="portfolio-info">
+                        <h3 class="portfolio-title">Ceramic Creations</h3>
+                        <p class="portfolio-description">Handcrafted pottery with intricate detail and unique patterns</p>
+                    </div>
+                </div>
+                <div class="portfolio-item">
+                    <img src="https://images.unsplash.com/photo-1561214115-f2f134cc4912?w=400&h=400&fit=crop" alt="Mixed Media" class="portfolio-image">
+                    <div class="portfolio-info">
+                        <h3 class="portfolio-title">Mixed Media Art</h3>
+                        <p class="portfolio-description">Experimental pieces combining multiple artistic mediums</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Shop Section -->
+        <div id="shop-section" class="section" style="display: none;">
+            <h2 class="section-title">Shop</h2>
+            <div class="shop-grid">
+                <div class="shop-item">
+                    <img src="https://images.unsplash.com/photo-1578926314433-e2789279f4aa?w=400&h=400&fit=crop" alt="Product" class="shop-image">
+                    <div class="shop-info">
+                        <h3 class="shop-title">Peacock Mandala Print</h3>
+                        <div class="shop-price">
+                            <span class="price">₹2,290</span>
+                            <button class="add-to-cart">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="shop-item">
+                    <img src="https://images.unsplash.com/photo-1610701596007-11502861dcfa?w=400&h=400&fit=crop" alt="Product" class="shop-image">
+                    <div class="shop-info">
+                        <h3 class="shop-title">Decorative Ceramic Plate</h3>
+                        <div class="shop-price">
+                            <span class="price">₹3,500</span>
+                            <button class="add-to-cart">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="shop-item">
+                    <img src="https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?w=400&h=400&fit=crop" alt="Product" class="shop-image">
+                    <div class="shop-info">
+                        <h3 class="shop-title">Paper Flower Bouquet</h3>
+                        <div class="shop-price">
+                            <span class="price">₹1,800</span>
+                            <button class="add-to-cart">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="shop-item">
+                    <img src="https://images.unsplash.com/photo-1513519245088-0e12902e35ca?w=400&h=400&fit=crop" alt="Product" class="shop-image">
+                    <div class="shop-info">
+                        <h3 class="shop-title">Abstract Canvas Art</h3>
+                        <div class="shop-price">
+                            <span class="price">₹5,200</span>
+                            <button class="add-to-cart">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="shop-item">
+                    <img src="https://images.unsplash.com/photo-1547891654-e66ed7ebb968?w=400&h=400&fit=crop" alt="Product" class="shop-image">
+                    <div class="shop-info">
+                        <h3 class="shop-title">Golden Mandala Frame</h3>
+                        <div class="shop-price">
+                            <span class="price">₹4,100</span>
+                            <button class="add-to-cart">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="shop-item">
+                    <img src="https://images.unsplash.com/photo-1561214115-f2f134cc4912?w=400&h=400&fit=crop" alt="Product" class="shop-image">
+                    <div class="shop-info">
+                        <h3 class="shop-title">Textile Wall Hanging</h3>
+                        <div class="shop-price">
+                            <span class="price">₹2,950</span>
+                            <button class="add-to-cart">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Classes Section -->
+        <div id="classes-section" class="section" style="display: none;">
+            <h2 class="section-title">Classes</h2>
+            <div class="classes-grid">
+                <div class="class-card">
+                    <div class="class-image" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); display: flex; align-items: center; justify-content: center; font-size: 64px;">🎨</div>
+                    <div class="class-info">
+                        <h3 class="class-title">Mandala Art Fundamentals</h3>
+                        <p class="class-description">Learn the basics of creating beautiful mandalas from scratch. Perfect for beginners!</p>
+                        <div class="class-meta">
+                            <span class="class-duration">⏱️ 6 weeks</span>
+                            <button class="enroll-btn">Enroll Now</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="class-card">
+                    <div class="class-image" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); display: flex; align-items: center; justify-content: center; font-size: 64px;">🖌️</div>
+                    <div class="class-info">
+                        <h3 class="class-title">Acrylic Painting Masterclass</h3>
+                        <p class="class-description">Dive deep into acrylic techniques and create stunning contemporary artwork.</p>
+                        <div class="class-meta">
+                            <span class="class-duration">⏱️ 8 weeks</span>
+                            <button class="enroll-btn">Enroll Now</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="class-card">
+                    <div class="class-image" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); display: flex; align-items: center; justify-content: center; font-size: 64px;">💐</div>
+                    <div class="class-info">
+                        <h3 class="class-title">Paper Flower Crafting</h3>
+                        <p class="class-description">Create beautiful paper flowers that last forever. All skill levels welcome!</p>
+                        <div class="class-meta">
+                            <span class="class-duration">⏱️ 4 weeks</span>
+                            <button class="enroll-btn">Enroll Now</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="class-card">
+                    <div class="class-image" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); display: flex; align-items: center; justify-content: center; font-size: 64px;">🎭</div>
+                    <div class="class-info">
+                        <h3 class="class-title">Digital Illustration Basics</h3>
+                        <p class="class-description">Master digital art tools and techniques to bring your creative visions to life.</p>
+                        <div class="class-meta">
+                            <span class="class-duration">⏱️ 10 weeks</span>
+                            <button class="enroll-btn">Enroll Now</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="class-card">
+                    <div class="class-image" style="background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%); display: flex; align-items: center; justify-content: center; font-size: 64px;">🏺</div>
+                    <div class="class-info">
+                        <h3 class="class-title">Ceramic Pottery Workshop</h3>
+                        <p class="class-description">Hands-on pottery class where you'll learn to create functional and decorative ceramics.</p>
+                        <div class="class-meta">
+                            <span class="class-duration">⏱️ 12 weeks</span>
+                            <button class="enroll-btn">Enroll Now</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="class-card">
+                    <div class="class-image" style="background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%); display: flex; align-items: center; justify-content: center; font-size: 64px;">✨</div>
+                    <div class="class-info">
+                        <h3 class="class-title">Mixed Media Exploration</h3>
+                        <p class="class-description">Experiment with various materials and techniques to create unique mixed media artwork.</p>
+                        <div class="class-meta">
+                            <span class="class-duration">⏱️ 5 weeks</span>
+                            <button class="enroll-btn">Enroll Now</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showSection(section) {
+            // Hide all sections
+            document.getElementById('portfolio-section').style.display = 'none';
+            document.getElementById('shop-section').style.display = 'none';
+            document.getElementById('classes-section').style.display = 'none';
+            
+            // Remove active class from all tabs
+            const tabs = document.querySelectorAll('.nav-tab');
+            tabs.forEach(tab => tab.classList.remove('active'));
+            
+            // Show selected section
+            document.getElementById(section + '-section').style.display = 'block';
+            
+            // Add active class to clicked tab
+            event.target.closest('.nav-tab').classList.add('active');
+            
+            // Smooth scroll to section
+            document.getElementById(section + '-section').scrollIntoView({ 
+                behavior: 'smooth', 
+                block: 'start' 
+            });
+        }
+
+        // Add to cart functionality
+        document.addEventListener('click', function(e) {
+            if (e.target.classList.contains('add-to-cart')) {
+                const button = e.target;
+                const originalText = button.textContent;
+                button.textContent = 'Added! ✓';
+                button.style.background = '#4CAF50';
+                
+                setTimeout(() => {
+                    button.textContent = originalText;
+                    button.style.background = '#1a1a1a';
+                }, 2000);
+            }
+            
+            if (e.target.classList.contains('enroll-btn')) {
+                const button = e.target;
+                const originalText = button.textContent;
+                button.textContent = 'Enrolled! ✓';
+                button.style.background = '#4CAF50';
+                
+                setTimeout(() => {
+                    button.textContent = originalText;
+                    button.style.background = '#d4745e';
+                }, 2000);
+            }
+        });
+
+        // Parallax effect for ambient shapes
+        window.addEventListener('mousemove', (e) => {
+            const shapes = document.querySelectorAll('.ambient-shape');
+            const x = e.clientX / window.innerWidth;
+            const y = e.clientY / window.innerHeight;
+            
+            shapes.forEach((shape, index) => {
+                const speed = (index + 1) * 15;
+                const currentTransform = shape.style.transform || '';
+                shape.style.transform = `${currentTransform} translate(${x * speed}px, ${y * speed}px)`;
+            });
+        });
+
+        // Animate elements on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all portfolio, shop, and class items
+        document.querySelectorAll('.portfolio-item, .shop-item, .class-card').forEach(item => {
+            observer.observe(item);
+        });
+    </script>
+</body>
+</html>
