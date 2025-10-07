@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Artist Approvals</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: #f8f8f8;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            font-size: 32px;
+            color: #1a1a1a;
+            margin-bottom: 10px;
+        }
+
+        .stats {
+            display: flex;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 20px;
+            border-radius: 12px;
+            flex: 1;
+        }
+
+        .stat-number {
+            font-size: 36px;
+            font-weight: bold;
+        }
+
+        .stat-label {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        .pending-list {
+            display: grid;
+            gap: 20px;
+        }
+
+        .artist-card {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .artist-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .artist-header {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .artist-image {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .artist-info {
+            flex: 1;
+        }
+
+        .artist-name {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .artist-specialty {
+            display: inline-block;
+            background: rgba(102, 126, 234, 0.1);
+            color: #667eea;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .artist-about {
+            margin: 20px 0;
+            line-height: 1.6;
+            color: #666;
+        }
+
+        .products-preview {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 10px;
+            margin: 20px 0;
+        }
+
+        .product-thumb {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .btn {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-approve {
+            background: linear-gradient(135deg, #4CAF50, #45a049);
+            color: white;
+            flex: 1;
+        }
+
+        .btn-approve:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(76, 175, 80, 0.3);
+        }
+
+        .btn-reject {
+            background: linear-gradient(135deg, #ff6b6b, #ff5252);
+            color: white;
+            flex: 1;
+        }
+
+        .btn-reject:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(255, 107, 107, 0.3);
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            background: white;
+            border-radius: 20px;
+        }
+
+        .empty-icon {
+            font-size: 80px;
+            margin-bottom: 20px;
+        }
+
+        .tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+        }
+
+        .tab {
+            padding: 12px 30px;
+            background: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .tab.active {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+        }
+
+        .submitted-date {
+            font-size: 12px;
+            color: #999;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎨 Artist Approval Dashboard</h1>
+            <p style="color: #666; margin-top: 10px;">Review and approve artist applications</p>
+            <div class="stats">
+                <div class="stat-card">
+                    <div class="stat-number" id="pendingCount">0</div>
+                    <div class="stat-label">Pending Applications</div>
+                </div>
+                <div class="stat-card" style="background: linear-gradient(135deg, #4CAF50, #45a049);">
+                    <div class="stat-number" id="approvedCount">0</div>
+                    <div class="stat-label">Approved Artists</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="tabs">
+            <button class="tab active" onclick="showTab('pending')">Pending</button>
+            <button class="tab" onclick="showTab('approved')">Approved</button>
+        </div>
+
+        <div id="pendingSection" class="pending-list"></div>
+        <div id="approvedSection" class="pending-list" style="display: none;"></div>
+    </div>
+
+    <script>
+        function loadArtists() {
+            const pendingArtists = JSON.parse(localStorage.getItem('pendingArtists') || '[]');
+            const approvedArtists = JSON.parse(localStorage.getItem('approvedArtists') || '[]');
+            
+            document.getElementById('pendingCount').textContent = pendingArtists.length;
+            document.getElementById('approvedCount').textContent = approvedArtists.length;
+            
+            displayArtists(pendingArtists, 'pendingSection', true);
+            displayArtists(approvedArtists, 'approvedSection', false);
+        }
+
+        function displayArtists(artists, containerId, showActions) {
+            const container = document.getElementById(containerId);
+            
+            if (artists.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-state">
+                        <div class="empty-icon">📭</div>
+                        <h2>No artists to display</h2>
+                        <p style="color: #666; margin-top: 10px;">Check back later for new applications</p>
+                    </div>
+                `;
+                return;
+            }
+
+            container.innerHTML = artists.map((artist, index) => {
+                const submittedDate = new Date(artist.submittedDate).toLocaleDateString('en-US', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric',
+                    hour: '2-digit',
+                    minute: '2-digit'
+                });
+
+                const productsHTML = artist.products.length > 0 ? `
+                    <div class="products-preview">
+                        ${artist.products.slice(0, 4).map(p => `
+                            <img src="${p.imageData || 'https://via.placeholder.com/150'}" class="product-thumb" alt="${p.name}">
+                        `).join('')}
+                    </div>
+                ` : '';
+
+                const actionsHTML = showActions ? `
+                    <div class="action-buttons">
+                        <button class="btn btn-approve" onclick="approveArtist(${index})">✓ Approve Artist</button>
+                        <button class="btn btn-reject" onclick="rejectArtist(${index})">✗ Reject</button>
+                    </div>
+                ` : '';
+
+                return `
+                    <div class="artist-card">
+                        <div class="artist-header">
+                            <img src="${artist.profilePicData}" class="artist-image" alt="${artist.username}">
+                            <div class="artist-info">
+                                <div class="artist-name">${artist.username}</div>
+                                <span class="artist-specialty">${artist.specialty}</span>
+                                <div class="submitted-date">Submitted: ${submittedDate}</div>
+                            </div>
+                        </div>
+                        <div class="artist-about">${artist.aboutMe}</div>
+                        ${productsHTML}
+                        ${actionsHTML}
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function approveArtist(index) {
+            const pendingArtists = JSON.parse(localStorage.getItem('pendingArtists') || '[]');
+            const approvedArtists = JSON.parse(localStorage.getItem('approvedArtists') || '[]');
+            
+            const artist = pendingArtists.splice(index, 1)[0];
+            artist.status = 'approved';
+            artist.approvedDate = new Date().toISOString();
+            
+            approvedArtists.push(artist);
+            
+            localStorage.setItem('pendingArtists', JSON.stringify(pendingArtists));
+            localStorage.setItem('approvedArtists', JSON.stringify(approvedArtists));
+            
+            loadArtists();
+            alert(`✅ ${artist.username} has been approved!`);
+        }
+
+        function rejectArtist(index) {
+            if (!confirm('Are you sure you want to reject this artist application?')) {
+                return;
+            }
+            
+            const pendingArtists = JSON.parse(localStorage.getItem('pendingArtists') || '[]');
+            const artist = pendingArtists.splice(index, 1)[0];
+            
+            localStorage.setItem('pendingArtists', JSON.stringify(pendingArtists));
+            
+            loadArtists();
+            alert(`${artist.username}'s application has been rejected.`);
+        }
+
+        function showTab(tab) {
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            if (tab === 'pending') {
+                document.getElementById('pendingSection').style.display = 'grid';
+                document.getElementById('approvedSection').style.display = 'none';
+            } else {
+                document.getElementById('pendingSection').style.display = 'none';
+                document.getElementById('approvedSection').style.display = 'grid';
+            }
+        }
+
+        loadArtists();
+    </script>
+</body>
+</html>

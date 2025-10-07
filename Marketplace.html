@@ -247,6 +247,74 @@
     </div>
 
     <script>
+          function addToCart(item) {
+        // Get existing cart or create a new one
+        let cart = JSON.parse(localStorage.getItem('artiqueCart') || '[]');
+        // Add new item
+        cart.push(item);
+        // Save back to localStorage
+        localStorage.setItem('artiqueCart', JSON.stringify(cart));
+        // Update the visual cart counter
+        updateCartIcon();
+    }
+
+    // Function to update the cart icon with a count
+    function updateCartIcon() {
+        const cart = JSON.parse(localStorage.getItem('artiqueCart') || '[]');
+        const cartIcon = document.querySelectorAll('.nav-icon')[1]; // Assuming cart is the 2nd icon
+
+        if (cartIcon && cart.length > 0) {
+            cartIcon.innerHTML = `🛒<span style="position: absolute; top: -5px; right: -5px; background: #ff6b6b; color: white; border-radius: 50%; width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: bold;">${cart.length}</span>`;
+            cartIcon.style.position = 'relative';
+        } else if (cartIcon) {
+            cartIcon.innerHTML = '🛒';
+        }
+    }
+
+    // Buy button functionality
+    const buyButtons = document.querySelectorAll('.buy-btn');
+    buyButtons.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            e.stopPropagation();
+
+            // ** NEW: Check if user is logged in **
+            const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+            if (!isLoggedIn) {
+                alert("Please log in to add items to your cart.");
+                // Optionally, redirect to the login page or open a login modal
+                // window.location.href = 'guestPage.html';
+                return; // Stop the function
+            }
+
+            // Find the parent card to get item details
+            const card = e.target.closest('.product-card, .lesson-card');
+            if (!card) return;
+
+            // Extract item details
+            const item = {
+                title: card.querySelector('.product-title, .lesson-title').textContent,
+                artist: card.querySelector('.product-artist, .lesson-session') ? card.querySelector('.product-artist, .lesson-session').textContent : 'Class',
+                price: card.querySelector('.product-price, .lesson-price').textContent.trim(),
+                image: card.querySelector('.product-image, .lesson-image').src
+            };
+            
+            // Add the item to the cart
+            addToCart(item);
+
+            // Visual feedback for the user
+            const originalText = btn.textContent;
+            btn.textContent = 'Added to Cart! ✓';
+            btn.style.background = 'linear-gradient(135deg, #4CAF50, #45a049)';
+            
+            setTimeout(() => {
+                btn.textContent = originalText;
+                btn.style.background = 'linear-gradient(135deg, #ff6b6b, #ff9a56)';
+            }, 2000);
+        });
+    });
+
+    // Also, update the cart icon on initial page load
+    document.addEventListener('DOMContentLoaded', updateCartIcon);
         // Filter functionality
         const filterOptions = document.querySelectorAll('.filter-option input');
         const products = document.querySelectorAll('.product-card');

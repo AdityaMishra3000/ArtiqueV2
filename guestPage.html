@@ -45,7 +45,7 @@
         </div>
 
         <h2 class="section-title">Featured Artists</h2>
-        <div class="artists-grid">
+        <div class="artists-grid" id="artists-grid">
             <div class="artist-card" onclick="window.location.href='ArtistProfile-Anne.html'">
                 <div style="position: relative;">
                     <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&h=400&fit=crop" alt="Artist" class="artist-image">
@@ -120,10 +120,6 @@
                 <div class="sidebar-item active">
                     <span>👤</span>
                     <span>User profile</span>
-                </div>
-                <div class="sidebar-item">
-                    <span>📁</span>
-                    <span>Portfolio</span>
                 </div>
                 <div class="sidebar-item">
                     <span>🛍️</span>
@@ -205,38 +201,73 @@
   </div>
   
   <script>
+    // --- START: MODIFIED SCRIPT ---
+
+    // This runs after the whole page has loaded
+    document.addEventListener('DOMContentLoaded', () => {
+        // ... (The code to display approved artists remains the same) ...
+        const artistsGrid = document.getElementById('artists-grid');
+        const approvedArtists = JSON.parse(localStorage.getItem('approvedArtists') || '[]');
+        artistsGrid.innerHTML = '';
+        if (approvedArtists.length > 0) {
+            approvedArtists.forEach(artist => {
+                const artistCardHTML = `
+                    <div class="artist-card" onclick="window.location.href='ArtistProfile.html?username=${encodeURIComponent(artist.username)}'">
+                        <div style="position: relative;">
+                            <img src="${artist.profilePicData}" alt="${artist.username}" class="artist-image">
+                            <div class="artist-badge">🎨</div>
+                        </div>
+                        <div class="artist-info">
+                            <div class="artist-category">${artist.username}</div>
+                            <div class="artist-status">${artist.specialty}</div>
+                        </div>
+                    </div>`;
+                artistsGrid.insertAdjacentHTML('beforeend', artistCardHTML);
+            });
+        } else {
+            artistsGrid.innerHTML = '<p style="color: #4a4a4a; text-align: center; grid-column: 1 / -1;">No featured artists yet.</p>';
+        }
+    });
+
     function openSignIn() {
-      document.getElementById('signin-overlay').style.display = 'flex';
-      // Reset state
-      document.getElementById('signup-choice').style.display = 'block';
-      document.getElementById('user-form').style.display = 'none';
-      document.getElementById('artist-redirect').style.display = 'none';
+        document.getElementById('signin-overlay').style.display = 'flex';
+        document.getElementById('signup-choice').style.display = 'block';
+        document.getElementById('user-form').style.display = 'none';
+        document.getElementById('artist-redirect').style.display = 'none';
     }
-  
+
     function closeSignIn() {
-      document.getElementById('signin-overlay').style.display = 'none';
+        document.getElementById('signin-overlay').style.display = 'none';
     }
-  
+
     function chooseRole(role) {
-      if (role === 'user') {
-        document.getElementById('signup-choice').style.display = 'none';
-        document.getElementById('user-form').style.display = 'flex';
-      } else if (role === 'artist') {
-        document.getElementById('signup-choice').style.display = 'none';
-        document.getElementById('artist-redirect').style.display = 'block';
-        // optional: auto redirect after 2s
-        setTimeout(() => { window.location.href = "ArtistSignUp.html"; }, 2000);
-      }
+        if (role === 'user') {
+            document.getElementById('signup-choice').style.display = 'none';
+            document.getElementById('user-form').style.display = 'flex';
+        } else if (role === 'artist') {
+            document.getElementById('signup-choice').style.display = 'none';
+            document.getElementById('artist-redirect').style.display = 'block';
+            setTimeout(() => { window.location.href = "ArtistSignUp.html"; }, 2000);
+        }
     }
-  
+
     function handleUserSignup(e) {
-      e.preventDefault();
-      alert("User signed up successfully!");
-      closeSignIn();
+        e.preventDefault();
+        // ** NEW: Set login status in localStorage **
+        localStorage.setItem('isLoggedIn', 'true');
+        // We can also store the user's name for personalization later
+        const username = e.target.querySelector('input[type="text"]').value;
+        localStorage.setItem('currentUser', username);
+
+        alert(`User "${username}" signed up and logged in successfully!`);
+        closeSignIn();
+        // You might want to refresh the page or update the UI to show a "Logged In" state
+        window.location.reload(); 
     }
-  </script>
+    // --- END: MODIFIED SCRIPT ---
+</script>
   
 </body>
 </html>
             
-                            
+The cart functionality is not actually working as in the button when i press buy now its not updating. When i sign up in the guest page. I want the user name etc to be displayed. Before signing in none of the artist should appear until signed in. And the flow of ux should be smoother and better through the pages. The logged in user should reflect everywhere

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Artist Sign Up - KalaMandir</title>
+    <title>Artist Sign Up - Artique</title>
     <style>
         * {
             margin: 0;
@@ -471,10 +471,33 @@
         .success-message {
             background: linear-gradient(135deg, #4CAF50, #45a049);
             color: white;
-            padding: 20px;
+            padding: 30px;
             border-radius: 12px;
             text-align: center;
             display: none;
+            margin-top: 20px;
+        }
+
+        .success-icon {
+            font-size: 64px;
+            margin-bottom: 20px;
+        }
+
+        .success-message h3 {
+            font-size: 28px;
+            margin-bottom: 15px;
+        }
+
+        .success-message p {
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 10px;
+        }
+
+        .approval-box {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 20px;
+            border-radius: 12px;
             margin-top: 20px;
         }
 
@@ -512,7 +535,7 @@
         <div class="logo">
             <div class="logo-content">
                 <div class="logo-icon">🎨</div>
-                KalaMandir
+                Artique
             </div>
         </div>
 
@@ -534,7 +557,6 @@
             </div>
 
             <form id="artistSignupForm">
-                <!-- Step 1: Account Information -->
                 <div class="form-step active" id="step1">
                     <h2 class="form-title">Create Your Account</h2>
                     <p class="form-subtitle">Let's start with the basics</p>
@@ -568,7 +590,6 @@
                     </div>
                 </div>
 
-                <!-- Step 2: Profile Information -->
                 <div class="form-step" id="step2">
                     <h2 class="form-title">Build Your Profile</h2>
                     <p class="form-subtitle">Tell us about yourself and your art</p>
@@ -638,14 +659,11 @@
                     </div>
                 </div>
 
-                <!-- Step 3: Products -->
                 <div class="form-step" id="step3">
                     <h2 class="form-title">Showcase Your Work</h2>
                     <p class="form-subtitle">Add products to your portfolio</p>
 
-                    <div id="productsContainer">
-                        <!-- Products will be added here dynamically -->
-                    </div>
+                    <div id="productsContainer"></div>
 
                     <button type="button" class="add-product-btn" onclick="addProduct()">
                         <span>➕</span> Add Product
@@ -653,14 +671,20 @@
 
                     <div class="form-actions">
                         <button type="button" class="btn btn-back" onclick="prevStep(3)">← Back</button>
-                        <button type="submit" class="btn btn-submit">Create Profile 🎉</button>
+                        <button type="submit" class="btn btn-submit">Submit for Approval</button>
                     </div>
                 </div>
             </form>
 
             <div class="success-message" id="successMessage">
-                <h3 style="font-size: 24px; margin-bottom: 10px;">🎉 Profile Created Successfully!</h3>
-                <p>Redirecting to your profile...</p>
+                <div class="success-icon">✅</div>
+                <h3>Application Submitted Successfully!</h3>
+                <p>Thank you for applying to join Artique.</p>
+                <div class="approval-box">
+                    <p><strong>⏳ Your profile is under review</strong></p>
+                    <p>Our team will verify your information and artwork within 48 hours.</p>
+                    <p>You'll receive an email once your profile is approved.</p>
+                </div>
             </div>
         </div>
     </div>
@@ -668,9 +692,7 @@
     <script>
         let currentStep = 1;
         let productCount = 0;
-        let selectedSpecialties = [];
 
-        // Step navigation
         function nextStep(step) {
             if (validateStep(step)) {
                 currentStep++;
@@ -695,7 +717,6 @@
             const width = ((currentStep - 1) / 2) * 100;
             progressLine.style.width = width + '%';
 
-            // Update step circles
             for (let i = 1; i <= 3; i++) {
                 const circle = document.getElementById(`step${i}Circle`);
                 const label = document.querySelectorAll('.step-label')[i - 1];
@@ -717,7 +738,6 @@
             }
         }
 
-        // Validation
         function validateStep(step) {
             if (step === 1) {
                 const username = document.getElementById('username').value.trim();
@@ -796,7 +816,6 @@
             }, 3000);
         }
 
-        // Image preview
         function previewImage(input, previewId) {
             if (input.files && input.files[0]) {
                 const reader = new FileReader();
@@ -809,7 +828,6 @@
             }
         }
 
-        // Specialty selection
         function selectSpecialty(element, specialty) {
             document.querySelectorAll('.specialty-option').forEach(opt => {
                 opt.classList.remove('selected');
@@ -818,7 +836,6 @@
             document.getElementById('specialty').value = specialty;
         }
 
-        // Product management
         function addProduct() {
             productCount++;
             const container = document.getElementById('productsContainer');
@@ -857,11 +874,9 @@
             setTimeout(() => product.remove(), 300);
         }
 
-        // Form submission
         document.getElementById('artistSignupForm').addEventListener('submit', function(e) {
             e.preventDefault();
             
-            // Collect all form data
             const formData = {
                 username: document.getElementById('username').value,
                 email: document.getElementById('email').value,
@@ -870,12 +885,13 @@
                 bannerPic: document.getElementById('bannerPic').files[0],
                 aboutMe: document.getElementById('aboutMe').value,
                 specialty: document.getElementById('specialty').value,
-                products: []
+                products: [],
+                status: 'pending',
+                submittedDate: new Date().toISOString()
             };
 
-            // Collect products
             const productItems = document.querySelectorAll('.product-item');
-            productItems.forEach((item, index) => {
+            productItems.forEach((item) => {
                 const id = item.id.replace('product', '');
                 const product = {
                     name: document.querySelector(`[name="productName${id}"]`)?.value || '',
@@ -888,7 +904,6 @@
                 }
             });
 
-            // Store in localStorage
             const profilePicReader = new FileReader();
             const bannerPicReader = new FileReader();
             
@@ -897,8 +912,6 @@
                 
                 bannerPicReader.onload = function(e) {
                     formData.bannerPicData = e.target.result;
-                    
-                    // Process product images
                     processProductImages(formData);
                 };
                 bannerPicReader.readAsDataURL(formData.bannerPic);
@@ -911,7 +924,7 @@
             const totalProducts = formData.products.length;
             
             if (totalProducts === 0) {
-                saveAndRedirect(formData);
+                saveToLocalStorage(formData);
                 return;
             }
             
@@ -923,39 +936,37 @@
                         processedProducts++;
                         
                         if (processedProducts === totalProducts) {
-                            saveAndRedirect(formData);
+                            saveToLocalStorage(formData);
                         }
                     };
                     reader.readAsDataURL(product.image);
                 } else {
                     processedProducts++;
                     if (processedProducts === totalProducts) {
-                        saveAndRedirect(formData);
+                        saveToLocalStorage(formData);
                     }
                 }
             });
         }
 
-        function saveAndRedirect(formData) {
-            // Remove file objects (can't be stringified)
+        function saveToLocalStorage(formData) {
             delete formData.profilePic;
             delete formData.bannerPic;
             formData.products.forEach(p => delete p.image);
             
-            // Save to localStorage
-            localStorage.setItem('artistProfile', JSON.stringify(formData));
+            // Get existing pending artists or initialize array
+            let pendingArtists = JSON.parse(localStorage.getItem('pendingArtists') || '[]');
+            
+            // Add new artist to pending list
+            pendingArtists.push(formData);
+            localStorage.setItem('pendingArtists', JSON.stringify(pendingArtists));
             
             // Show success message
             document.getElementById('successMessage').style.display = 'block';
             document.getElementById('artistSignupForm').style.display = 'none';
-            
-            // Redirect after 2 seconds
-            setTimeout(() => {
-                window.location.href = 'artist-profile-display.html';
-            }, 2000);
+            document.querySelector('.progress-bar').style.display = 'none';
         }
 
-        // Add CSS for fadeOut animation
         const style = document.createElement('style');
         style.textContent = `
             @keyframes fadeOut {
@@ -971,7 +982,6 @@
         `;
         document.head.appendChild(style);
 
-        // Auto-hide error messages on input
         document.querySelectorAll('.form-input').forEach(input => {
             input.addEventListener('input', function() {
                 const errorId = this.id + 'Error';
@@ -982,7 +992,6 @@
             });
         });
 
-        // Initialize with one product
         addProduct();
     </script>
 </body>
